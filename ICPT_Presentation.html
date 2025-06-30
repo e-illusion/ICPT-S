@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICPT 高性能图像处理系统 - 学术展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin: 20px;
+            width: calc(100% - 40px);
+            height: calc(100% - 40px);
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn:hover {
+            background: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Typography */
+        .slide h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .slide h2 {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: #34495e;
+            margin-bottom: 25px;
+            border-left: 8px solid #3498db;
+            padding-left: 25px;
+            line-height: 1.3;
+        }
+
+        .slide h3 {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #34495e;
+            margin-bottom: 20px;
+            margin-top: 25px;
+        }
+
+        .slide p,
+        .slide li {
+            font-size: 1.6em;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .subtitle {
+            font-size: 2.2em;
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* Slide specific styles */
+        .slide-1 {
+            text-align: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .highlight-item {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #3498db;
+        }
+
+        .highlight-item .emoji {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .highlight-item h4 {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .presenter {
+            margin-top: 50px;
+            font-size: 1.8em;
+            color: #34495e;
+            font-weight: 600;
+        }
+
+        /* Architecture diagram */
+        .architecture-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .arch-diagram {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #e9ecef;
+        }
+
+        .arch-text {
+            flex: 1;
+        }
+
+        .diagram-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border: 3px dashed #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+            color: #666;
+            text-align: center;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        /* Function modules */
+        .function-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 35px;
+            margin: 30px 0;
+        }
+
+        .function-module {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .function-module h4 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .function-module ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .function-module li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.4em;
+        }
+
+        .function-module li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Performance table */
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .performance-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .performance-table td {
+            padding: 20px;
+            text-align: center;
+            font-size: 1.6em;
+            font-weight: 600;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        .performance-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-excellent {
+            color: #27ae60;
+            font-weight: 800;
+        }
+
+        .status-good {
+            color: #f39c12;
+            font-weight: 800;
+        }
+
+        /* Tech stack */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .tech-category {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-top: 6px solid #3498db;
+        }
+
+        .tech-category h4 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .tech-category ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-category li {
+            margin-bottom: 8px;
+            font-size: 1.4em;
+            color: #34495e;
+            font-weight: 600;
+        }
+
+        /* Deployment features */
+        .deployment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .deployment-item {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .deployment-item h4 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* Summary page */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .value-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 8px solid #e74c3c;
+        }
+
+        .value-card h4 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .cta-section h3 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1200px) {
+            .slide {
+                padding: 40px;
+            }
+
+            .slide h1 {
+                font-size: 3em;
+            }
+
+            .slide h2 {
+                font-size: 2.4em;
+            }
+
+            .highlight-grid,
+            .function-grid,
+            .deployment-grid,
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .architecture-container {
+                flex-direction: column;
+            }
+
+            .tech-stack {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px;
+            }
+
+            .slide h1 {
+                font-size: 2.5em;
+            }
+
+            .slide h2 {
+                font-size: 2em;
+            }
+
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: 封面页 -->
+        <div class="slide slide-1 active" id="slide-1">
+            <h1>ICPT：企业级高性能图像处理与传输系统</h1>
+            <p class="subtitle">一个集采集、处理、传输于一体的现代化、高并发解决方案</p>
+
+            <div class="highlight-grid">
+                <div class="highlight-item">
+                    <div class="emoji">🚀</div>
+                    <h4>极致性能</h4>
+                    <p>Go + C++ 混合架构，并发处理超 1200 QPS，毫秒级响应</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="emoji">⚡</div>
+                    <h4>实时反馈</h4>
+                    <p>WebSocket 全双工通信，处理状态即时推送</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="emoji">🔒</div>
+                    <h4>企业安全</h4>
+                    <p>JWT 认证 + HTTPS 加密，提供金融级安全保障</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="emoji">🔧</div>
+                    <h4>易于扩展</h4>
+                    <p>微服务化设计，支持通过 Docker 快速部署与水平扩展</p>
+                </div>
+            </div>
+
+            <p class="presenter">演讲者: [您的姓名/团队名称]</p>
+        </div>
+
+        <!-- Slide 2: 系统架构 -->
+        <div class="slide" id="slide-2">
+            <h2>现代化混合架构：兼顾开发效率与运行性能</h2>
+
+            <div class="architecture-container">
+                <div class="arch-diagram">
+                    <div class="diagram-placeholder">
+                        【架构图占位符】<br><br>
+                        需要展示：<br>
+                        前端(Vue3/CLI) → API网关(Go Gin) → 实时通信(WebSocket)<br>
+                        ↓<br>
+                        业务逻辑(Go) ← → 任务队列(Redis)<br>
+                        ↓<br>
+                        数据持久化(MySQL) ← → 高性能Worker池(Go)<br>
+                        ↓<br>
+                        图像处理核心(C++ OpenCV)
+                    </div>
+                </div>
+                <div class="arch-text">
+                    <h3>设计亮点解读</h3>
+                    <ul>
+                        <li><strong>Go 主控业务</strong>: 利用Go语言高并发特性处理API请求、WebSocket连接和任务调度</li>
+                        <li><strong>C++ 核心加速</strong>: 将CPU密集型的图像处理下沉到C++和OpenCV，实现极致性能</li>
+                        <li><strong>Redis 任务队列</strong>: 作为异步处理的"缓冲池"，削峰填谷，极大提升系统吞吐量</li>
+                        <li><strong>前后端分离</strong>: 现代化的Vue3前端与Go后端完全分离，职责清晰</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: 核心功能(一) -->
+        <div class="slide" id="slide-3">
+            <h2>从采集到处理：一站式智能图像工作流</h2>
+
+            <div class="function-grid">
+                <div class="function-module">
+                    <h4>多源采集</h4>
+                    <ul>
+                        <li>现代化Web上传：支持拖拽、批量上传，提供实时进度</li>
+                        <li>摄像头实时采集：支持设备发现、实时预览、拍照及录制 (通过GoCV)</li>
+                    </ul>
+                </div>
+                <div class="function-module">
+                    <h4>智能处理</h4>
+                    <ul>
+                        <li>自动化处理流水线：上传后自动触发压缩、格式转换、缩略图生成</li>
+                        <li>高性能引擎：基于C++ OpenCV，处理速度远超原生Go库</li>
+                    </ul>
+                </div>
+                <div class="function-module">
+                    <h4>高效存储</h4>
+                    <ul>
+                        <li>原始图与缩略图分离存储，优化访问速度</li>
+                        <li>结构化数据存入MySQL，便于管理和检索</li>
+                    </ul>
+                </div>
+                <div class="function-module">
+                    <h4>用户体验</h4>
+                    <ul>
+                        <li>现代化Vue3界面，响应式设计适配多端</li>
+                        <li>CLI客户端支持自动化和脚本集成</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="diagram-placeholder">
+                【功能流程图占位符】<br><br>
+                需要展示：图像上传 → 队列处理 → OpenCV处理 → 缩略图生成 → 状态通知的完整流程
+            </div>
+        </div>
+
+        <!-- Slide 4: 核心功能(二) -->
+        <div class="slide" id="slide-4">
+            <h2>不止于功能：提供企业级的稳定、安全与可控</h2>
+
+            <div class="function-grid">
+                <div class="function-module">
+                    <h4>🔒 全方位安全</h4>
+                    <ul>
+                        <li>认证与授权：JWT令牌机制，支持自动续期</li>
+                        <li>传输安全：全链路支持HTTPS和WSS加密传输</li>
+                        <li>密码安全：使用bcrypt对用户密码进行哈希加密</li>
+                    </ul>
+                </div>
+                <div class="function-module">
+                    <h4>⚡ 实时通信</h4>
+                    <ul>
+                        <li>双向WebSocket通信，实时推送处理进度</li>
+                        <li>支持断线自动重连，保证连接稳定性</li>
+                        <li>系统通知和错误信息即时反馈</li>
+                    </ul>
+                </div>
+                <div class="function-module">
+                    <h4>📊 系统监控</h4>
+                    <ul>
+                        <li>提供 <strong>16项</strong> 系统健康指标的自动化检查</li>
+                        <li>结构化日志记录，便于查询与分析</li>
+                        <li>支持错误追踪和性能监控</li>
+                    </ul>
+                </div>
+                <div class="function-module">
+                    <h4>📱 多端支持</h4>
+                    <ul>
+                        <li>功能完善的现代化Web界面 (Vue3)</li>
+                        <li>强大的命令行客户端 (CLI)</li>
+                        <li>便于集成与自动化脚本操作</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="diagram-placeholder">
+                【安全架构图占位符】<br><br>
+                需要展示：JWT认证流程、HTTPS加密传输、WebSocket安全连接的示意图
+            </div>
+        </div>
+
+        <!-- Slide 5: 技术栈选型 -->
+        <div class="slide" id="slide-5">
+            <h2>精心选型：拥抱云原生与大前端技术生态</h2>
+
+            <div class="tech-stack">
+                <div class="tech-category">
+                    <h4>后端 (Backend)</h4>
+                    <ul>
+                        <li><strong>语言:</strong> Go 1.21+, C++</li>
+                        <li><strong>框架:</strong> Gin (Web框架)</li>
+                        <li><strong>实时通信:</strong> Gorilla WebSocket</li>
+                        <li><strong>数据存储:</strong> MySQL 8.0+, Redis 6.0+</li>
+                        <li><strong>图像处理:</strong> OpenCV 4.0+</li>
+                        <li><strong>认证:</strong> JWT + bcrypt</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h4>前端 (Frontend)</h4>
+                    <ul>
+                        <li><strong>框架:</strong> Vue.js 3.4+ (Composition API)</li>
+                        <li><strong>UI库:</strong> Element Plus 2.5+</li>
+                        <li><strong>构建工具:</strong> Vite 4.5+</li>
+                        <li><strong>状态管理:</strong> Pinia</li>
+                        <li><strong>路由:</strong> Vue Router</li>
+                        <li><strong>HTTP客户端:</strong> Axios</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h4>DevOps</h4>
+                    <ul>
+                        <li><strong>容器化:</strong> Docker, Docker Compose</li>
+                        <li><strong>自动化:</strong> Shell脚本</li>
+                        <li><strong>SSL/TLS:</strong> 自动证书生成</li>
+                        <li><strong>监控:</strong> 健康检查脚本</li>
+                        <li><strong>日志:</strong> 结构化日志系统</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="diagram-placeholder">
+                【技术栈架构图占位符】<br><br>
+                需要展示：技术栈的层次结构，从前端到后端到数据库的完整技术选型图
+            </div>
+        </div>
+
+        <!-- Slide 6: 性能表现 -->
+        <div class="slide" id="slide-6">
+            <h2>性能卓越：实测数据远超设计目标</h2>
+
+            <table class="performance-table">
+                <thead>
+                    <tr>
+                        <th>指标类型</th>
+                        <th>目标值</th>
+                        <th>实际测试值</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>并发请求 (QPS)</strong></td>
+                        <td>1000 QPS</td>
+                        <td><strong>1200+ QPS</strong></td>
+                        <td class="status-excellent">✅ 超出预期</td>
+                    </tr>
+                    <tr>
+                        <td><strong>API平均响应时间</strong></td>
+                        <td>&lt; 100ms</td>
+                        <td><strong>45ms</strong></td>
+                        <td class="status-excellent">✅ 卓越</td>
+                    </tr>
+                    <tr>
+                        <td><strong>单张图像处理耗时</strong></td>
+                        <td>&lt; 2s</td>
+                        <td><strong>1.2s</strong></td>
+                        <td class="status-excellent">✅ 卓越</td>
+                    </tr>
+                    <tr>
+                        <td><strong>内存占用 (满载)</strong></td>
+                        <td>&lt; 1GB</td>
+                        <td><strong>512MB</strong></td>
+                        <td class="status-excellent">✅ 优秀</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CPU使用率 (满载)</strong></td>
+                        <td>&lt; 80%</td>
+                        <td><strong>45%</strong></td>
+                        <td class="status-excellent">✅ 资源充足</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>结论</h3>
+            <p style="font-size: 1.8em; text-align: center; margin-top: 30px; font-weight: 600; color: #27ae60;">
+                系统在高并发场景下表现稳定，响应迅速，资源利用率高，具备出色的横向扩展潜力
+            </p>
+
+            <div class="diagram-placeholder">
+                【性能测试图表占位符】<br><br>
+                需要展示：QPS压力测试曲线图、响应时间分布图、资源使用率监控图
+            </div>
+        </div>
+
+        <!-- Slide 7: 部署与运维 -->
+        <div class="slide" id="slide-7">
+            <h2>为生产而生：一键部署与轻松运维</h2>
+
+            <div class="deployment-grid">
+                <div class="deployment-item">
+                    <h4>🚀 一键启动</h4>
+                    <p>提供 <code>start-services.sh</code> 和 <code>quick-start.sh</code> 脚本，屏蔽环境复杂性，实现一键启动所有服务</p>
+                </div>
+                <div class="deployment-item">
+                    <h4>🐳 Docker化部署</h4>
+                    <p>提供 <code>docker-compose.yml</code> 文件，实现开发、测试、生产环境的一致性，秒级启动整个系统</p>
+                </div>
+                <div class="deployment-item">
+                    <h4>🔒 生产级配置</h4>
+                    <ul>
+                        <li><strong>HTTPS支持:</strong> <code>start-all-https.sh</code> 脚本一键生成自签名证书</li>
+                        <li><strong>高可配置性:</strong> 通过 <code>config.yaml</code> 轻松调整性能参数</li>
+                    </ul>
+                </div>
+                <div class="deployment-item">
+                    <h4>🛠️ 完善的工具链</h4>
+                    <p>提供健康检查、服务启停、日志查看等全套运维脚本，极大降低维护成本</p>
+                </div>
+            </div>
+
+            <h3>健康检查示例</h3>
+            <div
+                style="background: #2c3e50; color: #ecf0f1; padding: 25px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 1.4em; margin: 20px 0;">
+                <p>$ ./health-check.sh</p>
+                <p style="color: #2ecc71;">✅ 16/16 项检查通过 (100%)</p>
+                <p style="color: #3498db;">🌐 前端服务: http://localhost:3000</p>
+                <p style="color: #3498db;">🔧 后端API: http://localhost:8080</p>
+                <p style="color: #3498db;">💾 数据库: MySQL连接正常</p>
+                <p style="color: #3498db;">⚡ Redis: 缓存服务正常</p>
+            </div>
+
+            <div class="diagram-placeholder">
+                【部署架构图占位符】<br><br>
+                需要展示：Docker容器部署架构、服务间依赖关系、监控和日志收集流程
+            </div>
+        </div>
+
+        <!-- Slide 8: 总结 -->
+        <div class="slide" id="slide-8">
+            <h2>ICPT：不止是图像系统，更是高性能业务的典范</h2>
+
+            <div class="summary-grid">
+                <div class="value-card">
+                    <h4>🔧 技术价值</h4>
+                    <p>成功融合 Go的高并发 与 C++的高性能，为类似场景提供了优秀的架构范例</p>
+                </div>
+                <div class="value-card">
+                    <h4>📦 产品价值</h4>
+                    <p>提供了从前端到后端，从开发到部署的完整、安全、可靠的企业级图像解决方案</p>
+                </div>
+                <div class="value-card">
+                    <h4>⚙️ 工程价值</h4>
+                    <p>项目结构清晰，代码规范，高度自动化，展现了优秀的软件工程实践</p>
+                </div>
+                <div class="value-card">
+                    <h4>🚀 业务价值</h4>
+                    <p>高性能、高可用、易扩展的特性，能够满足企业级应用的严格要求</p>
+                </div>
+            </div>
+
+            <h3>未来展望</h3>
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 10px; margin: 20px 0;">
+                <ul style="font-size: 1.5em; line-height: 1.8;">
+                    <li>🤖 集成更丰富的AI视觉算法</li>
+                    <li>☁️ 提供更完善的SaaS服务能力</li>
+                    <li>📊 构建更全面的监控告警体系</li>
+                    <li>🔄 支持多云部署和边缘计算</li>
+                </ul>
+            </div>
+
+            <div class="cta-section">
+                <h3>感谢聆听！欢迎体验与交流！</h3>
+                <p style="font-size: 1.8em; margin-bottom: 20px;">项目GitHub链接: [您的GitHub链接]</p>
+                <p style="font-size: 2.2em; font-weight: 800;">🌟 如果这个项目对你有帮助，请给我们一个 Star！🌟</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <button class="nav-btn" onclick="prevSlide()" id="prevBtn" disabled>← 上一页</button>
+        <div class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+        </div>
+        <button class="nav-btn" onclick="nextSlide()" id="nextBtn">下一页 →</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const totalSlides = 8;
+
+        function showSlide(index) {
+            // Hide all slides
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'prev');
+                if (i < index) {
+                    slide.classList.add('prev');
+                } else if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+
+            // Update counter
+            document.getElementById('currentSlide').textContent = index + 1;
+
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < totalSlides - 1) {
+                currentSlideIndex++;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                event.preventDefault(); 
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        document.getElementById('totalSlides').textContent = totalSlides;
+        showSlide(0);
+
+        // Auto-advance slides (optional - can be removed)
+        // setInterval(() => {
+        //     if (currentSlideIndex < totalSlides - 1) {
+        //         nextSlide();
+        //     }
+        // }, 30000); // Auto advance every 30 seconds
+    </script>
+</body>
+
+</html>

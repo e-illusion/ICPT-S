@@ -1,0 +1,259 @@
+2025/06/30 10:09:51 配置文件加载成功！
+2025/06/30 10:09:51 数据库连接成功！
+2025/06/30 10:09:51 数据库迁移成功！
+2025/06/30 10:09:51 Redis 连接成功！
+2025/06/30 10:09:51 WebSocket Hub 已启动
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+2025/06/30 10:09:51 ✅ 启用CORS跨域支持（动态源判断）
+2025/06/30 10:09:51 ✅ 启用Gzip压缩
+2025/06/30 10:09:51 ✅ 启用并发限制: 100
+[GIN-debug] GET    /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (6 handlers)
+[GIN-debug] HEAD   /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (6 handlers)
+[GIN-debug] GET    /web/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (6 handlers)
+[GIN-debug] HEAD   /web/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (6 handlers)
+[GIN-debug] GET    /                         --> main.main.(*RouterGroup).StaticFile.func7 (6 handlers)
+[GIN-debug] HEAD   /                         --> main.main.(*RouterGroup).StaticFile.func7 (6 handlers)
+[GIN-debug] GET    /ping                     --> main.main.func2 (6 handlers)
+[GIN-debug] POST   /api/v1/auth/register     --> icpt-system/internal/api.RegisterHandler (6 handlers)
+[GIN-debug] POST   /api/v1/auth/login        --> icpt-system/internal/api.LoginHandler (6 handlers)
+[GIN-debug] GET    /api/v1/profile           --> icpt-system/internal/api.GetProfileHandler (7 handlers)
+[GIN-debug] POST   /api/v1/upload            --> icpt-system/internal/api.UploadImageHandler (7 handlers)
+[GIN-debug] GET    /api/v1/images/:id        --> icpt-system/internal/api.GetImageStatusHandler (7 handlers)
+[GIN-debug] GET    /api/v1/images            --> icpt-system/internal/api.GetUserImagesHandler (7 handlers)
+[GIN-debug] DELETE /api/v1/images/:id        --> icpt-system/internal/api.DeleteImageHandler (7 handlers)
+[GIN-debug] POST   /api/v1/images/batch-delete --> icpt-system/internal/api.BatchDeleteImagesHandler (7 handlers)
+[GIN-debug] GET    /api/v1/ws                --> icpt-system/internal/api.WebSocketHandler (7 handlers)
+[GIN-debug] GET    /api/v1/ws/stats          --> icpt-system/internal/api.WebSocketStatsHandler (7 handlers)
+[GIN-debug] POST   /api/v1/notify/:userID    --> icpt-system/internal/api.NotifyTestHandler (7 handlers)
+[GIN-debug] POST   /api/v1/upload-sync       --> icpt-system/internal/api.UploadImageSyncHandlerForTest (6 handlers)
+2025/06/30 10:09:51 HTTP API 服务器启动中，监听地址: 0.0.0.0:8080 (对外开放)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
+[GIN] 2025/06/30 - 10:09:52 | 200 |      275.46µs |     58.19.27.59 | GET      "/api/v1/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6ImFkbWluIiwiaXNzIjoiaWNwdC1zeXN0ZW0iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTc1MTMzMzUzMywibmJmIjoxNzUxMjQ3MTMzLCJpYXQiOjE3NTEyNDcxMzN9.ozLr8YlxDwCgRDfaAlhAghsbAP6EdSRCf6jQcCdIIvQ"
+2025/06/30 10:09:52 WebSocket客户端已连接，用户ID: 6，总连接数: 1
+[GIN] 2025/06/30 - 10:10:41 | 204 |       47.59µs | 218.106.117.229 | OPTIONS  "/api/v1/profile?_t=1751249440922"
+[GIN] 2025/06/30 - 10:10:41 | 204 |      36.714µs | 218.106.117.229 | OPTIONS  "/api/v1/profile?_t=1751249440977"
+[GIN] 2025/06/30 - 10:10:41 | 200 |    2.197192ms | 218.106.117.229 | GET      "/api/v1/profile?_t=1751249440922"
+[GIN] 2025/06/30 - 10:10:41 | 200 |    1.288751ms | 218.106.117.229 | GET      "/api/v1/profile?_t=1751249440977"
+2025/06/30 10:10:42 WebSocket客户端已连接，用户ID: 6，总连接数: 2
+[GIN] 2025/06/30 - 10:10:42 | 200 |     252.377µs | 218.106.117.229 | GET      "/api/v1/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6ImFkbWluIiwiaXNzIjoiaWNwdC1zeXN0ZW0iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTc1MTMzMzUzMywibmJmIjoxNzUxMjQ3MTMzLCJpYXQiOjE3NTEyNDcxMzN9.ozLr8YlxDwCgRDfaAlhAghsbAP6EdSRCf6jQcCdIIvQ"
+[GIN] 2025/06/30 - 10:10:44 | 204 |      10.251µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751249443386"
+[GIN] 2025/06/30 - 10:10:44 | 200 |    4.683492ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751249443386"
+[GIN] 2025/06/30 - 10:10:44 | 200 |    7.926874ms |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250630095814-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:10:44 | 200 |    4.611961ms |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250630093901-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:10:44 | 200 |    4.300998ms |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250630090605-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:10:44 | 200 |     312.925µs |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250629171633-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:10:44 | 200 |     229.715µs |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250629170747-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:10:44 | 200 |     567.099µs |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250629170505-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:10:50 | 200 |     1.42109ms |       127.0.0.1 | GET      "/static/originals/20250630095814-600x600bb (1).jpg"
+2025/06/30 10:10:52 WebSocket客户端已断开，用户ID: 6，总连接数: 1
+
+2025/06/30 10:11:05 [31;1m/root/my-icpt-system/icpt-system/internal/api/auth_handler.go:44 [35;1mrecord not found
+[0m[33m[0.922ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE username = 'test_fix_8281' OR email = 'test_fix_8281@test.com' ORDER BY `users`.`id` LIMIT 1
+2025/06/30 10:11:05 用户注册成功: test_fix_8281 (ID: 8)
+[GIN] 2025/06/30 - 10:11:05 | 201 |   85.755588ms |     114.55.58.3 | POST     "/api/v1/auth/register"
+2025/06/30 10:11:05 收到文件: test_image.png, 大小: 67 bytes
+2025/06/30 10:11:05 图片记录 (ID: 1282) 创建成功, 任务已推送到队列
+[GIN] 2025/06/30 - 10:11:05 | 202 |     9.32682ms |     114.55.58.3 | POST     "/api/v1/upload"
+[GIN] 2025/06/30 - 10:11:05 | 200 |    1.463775ms |     114.55.58.3 | GET      "/api/v1/images/1282"
+[GIN] 2025/06/30 - 10:11:06 | 200 |     1.33467ms |     114.55.58.3 | GET      "/api/v1/images/1282"
+[GIN] 2025/06/30 - 10:11:07 | 200 |    1.369495ms |     114.55.58.3 | GET      "/api/v1/images/1282"
+[GIN] 2025/06/30 - 10:11:08 | 200 |    1.445743ms |     114.55.58.3 | GET      "/api/v1/images/1282"
+[GIN] 2025/06/30 - 10:11:09 | 200 |    1.590238ms |     114.55.58.3 | GET      "/api/v1/images/1282"
+[GIN] 2025/06/30 - 10:11:10 | 200 |    1.287762ms |     114.55.58.3 | GET      "/api/v1/images/1282"
+[GIN] 2025/06/30 - 10:11:11 | 200 |    2.502357ms |     114.55.58.3 | GET      "/api/v1/images/1282"
+[GIN] 2025/06/30 - 10:11:12 | 200 |    1.471005ms |     114.55.58.3 | GET      "/api/v1/images/1282"
+[GIN] 2025/06/30 - 10:11:13 | 200 |    1.328691ms |     114.55.58.3 | GET      "/api/v1/images/1282"
+[GIN] 2025/06/30 - 10:11:14 | 200 |    1.483468ms |     114.55.58.3 | GET      "/api/v1/images/1282"
+[GIN] 2025/06/30 - 10:11:15 | 200 |    2.390514ms |     114.55.58.3 | GET      "/api/v1/images?page=1&page_size=10"
+2025/06/30 10:11:38 WebSocket客户端已断开，用户ID: 6，总连接数: 0
+[GIN] 2025/06/30 - 10:11:40 | 204 |       11.04µs | 218.106.117.229 | OPTIONS  "/api/v1/profile?_t=1751249499520"
+[GIN] 2025/06/30 - 10:11:40 | 204 |      24.777µs | 218.106.117.229 | OPTIONS  "/api/v1/profile?_t=1751249499571"
+[GIN] 2025/06/30 - 10:11:40 | 200 |    2.023839ms | 218.106.117.229 | GET      "/api/v1/profile?_t=1751249499571"
+[GIN] 2025/06/30 - 10:11:40 | 200 |    3.143715ms | 218.106.117.229 | GET      "/api/v1/profile?_t=1751249499520"
+[GIN] 2025/06/30 - 10:11:41 | 200 |     146.339µs |     58.19.27.59 | GET      "/api/v1/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6ImFkbWluIiwiaXNzIjoiaWNwdC1zeXN0ZW0iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTc1MTMzMzUzMywibmJmIjoxNzUxMjQ3MTMzLCJpYXQiOjE3NTEyNDcxMzN9.ozLr8YlxDwCgRDfaAlhAghsbAP6EdSRCf6jQcCdIIvQ"
+2025/06/30 10:11:41 WebSocket客户端已连接，用户ID: 6，总连接数: 1
+[GIN] 2025/06/30 - 10:11:42 | 204 |      11.665µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751249501981"
+[GIN] 2025/06/30 - 10:11:42 | 200 |    2.380748ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751249501981"
+[GIN] 2025/06/30 - 10:11:43 | 200 |      54.377µs |       127.0.0.1 | GET      "/ping"
+[GIN] 2025/06/30 - 10:11:43 | 200 |     379.397µs |       127.0.0.1 | GET      "/"
+[GIN] 2025/06/30 - 10:11:48 | 204 |      11.394µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=file_name&order=desc&_t=1751249507711"
+[GIN] 2025/06/30 - 10:11:48 | 200 |    2.226876ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=file_name&order=desc&_t=1751249507711"
+[GIN] 2025/06/30 - 10:11:50 | 204 |       16.67µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=file_size&order=desc&_t=1751249509637"
+[GIN] 2025/06/30 - 10:11:50 | 200 |    2.188882ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=file_size&order=desc&_t=1751249509637"
+[GIN] 2025/06/30 - 10:11:51 | 204 |      10.884µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751249511161"
+[GIN] 2025/06/30 - 10:11:51 | 200 |    2.223044ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751249511161"
+[GIN] 2025/06/30 - 10:11:54 | 204 |      11.713µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&status=completed&_t=1751249514187"
+[GIN] 2025/06/30 - 10:11:54 | 200 |    2.541885ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&status=completed&_t=1751249514187"
+[GIN] 2025/06/30 - 10:11:56 | 204 |        39.3µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&status=processing&_t=1751249516236"
+[GIN] 2025/06/30 - 10:11:56 | 200 |     3.53471ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&status=processing&_t=1751249516236"
+[GIN] 2025/06/30 - 10:11:58 | 204 |      11.588µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=file_name&order=desc&status=processing&_t=1751249518311"
+[GIN] 2025/06/30 - 10:11:58 | 200 |    3.072323ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=file_name&order=desc&status=processing&_t=1751249518311"
+[GIN] 2025/06/30 - 10:12:00 | 204 |      60.663µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=file_name&order=desc&_t=1751249519771"
+[GIN] 2025/06/30 - 10:12:00 | 200 |     2.24348ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=file_name&order=desc&_t=1751249519771"
+[GIN] 2025/06/30 - 10:12:51 | 404 |      10.148µs |  90.151.171.106 | CONNECT  ""
+[GIN] 2025/06/30 - 10:13:01 | 200 |     269.804µs |  90.151.171.106 | GET      "/?Z75591226191Q1"
+[GIN] 2025/06/30 - 10:24:51 | 204 |      42.612µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250291257"
+[GIN] 2025/06/30 - 10:24:51 | 200 |    5.020016ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250291257"
+[GIN] 2025/06/30 - 10:24:52 | 304 |     153.862µs |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250630095814-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:24:52 | 304 |     163.621µs |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250630093901-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:24:52 | 304 |     134.601µs |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250630090605-600x600bb (1).jpg"
+2025/06/30 10:24:56 WebSocket客户端已断开，用户ID: 6，总连接数: 0
+[GIN] 2025/06/30 - 10:24:58 | 204 |      11.397µs | 218.106.117.229 | OPTIONS  "/api/v1/profile?_t=1751250297486"
+[GIN] 2025/06/30 - 10:24:58 | 204 |      33.431µs |     58.19.27.59 | OPTIONS  "/api/v1/profile?_t=1751250297512"
+[GIN] 2025/06/30 - 10:24:58 | 200 |    1.354446ms | 218.106.117.229 | GET      "/api/v1/profile?_t=1751250297486"
+[GIN] 2025/06/30 - 10:24:58 | 200 |     2.51137ms | 218.106.117.229 | GET      "/api/v1/profile?_t=1751250297512"
+2025/06/30 10:24:59 WebSocket客户端已连接，用户ID: 6，总连接数: 1
+[GIN] 2025/06/30 - 10:24:59 | 200 |     203.923µs | 218.106.117.229 | GET      "/api/v1/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6ImFkbWluIiwiaXNzIjoiaWNwdC1zeXN0ZW0iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTc1MTMzMzUzMywibmJmIjoxNzUxMjQ3MTMzLCJpYXQiOjE3NTEyNDcxMzN9.ozLr8YlxDwCgRDfaAlhAghsbAP6EdSRCf6jQcCdIIvQ"
+[GIN] 2025/06/30 - 10:24:59 | 204 |      13.175µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250298958"
+[GIN] 2025/06/30 - 10:24:59 | 200 |    2.365744ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250298958"
+[GIN] 2025/06/30 - 10:25:04 | 204 |      11.854µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250304009"
+[GIN] 2025/06/30 - 10:25:04 | 200 |    3.169573ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250304009"
+[GIN] 2025/06/30 - 10:25:35 | 204 |        8.92µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250334726"
+[GIN] 2025/06/30 - 10:25:35 | 200 |    2.246644ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250334726"
+[GIN] 2025/06/30 - 10:25:40 | 204 |      11.301µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250339929"
+[GIN] 2025/06/30 - 10:25:40 | 200 |    2.400683ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250339929"
+[GIN] 2025/06/30 - 10:25:59 | 204 |      13.394µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250358944"
+[GIN] 2025/06/30 - 10:25:59 | 200 |    2.289543ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250358944"
+[GIN] 2025/06/30 - 10:26:01 | 204 |      11.081µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250360400"
+[GIN] 2025/06/30 - 10:26:01 | 200 |    2.319861ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250360400"
+[GIN] 2025/06/30 - 10:26:03 | 204 |      13.447µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250362433"
+[GIN] 2025/06/30 - 10:26:03 | 200 |    2.369191ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250362433"
+[GIN] 2025/06/30 - 10:26:51 | 204 |      12.112µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250411274"
+[GIN] 2025/06/30 - 10:26:51 | 200 |    2.191963ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250411274"
+[GIN] 2025/06/30 - 10:30:38 | 401 |     147.045µs |     114.55.58.3 | GET      "/api/v1/images?page=1&page_size=5"
+
+2025/06/30 10:31:13 [31;1m/root/my-icpt-system/icpt-system/internal/api/auth_handler.go:144 [35;1mrecord not found
+[0m[33m[1.425ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE username = 'test123' OR email = 'test123' ORDER BY `users`.`id` LIMIT 1
+[GIN] 2025/06/30 - 10:31:13 | 401 |    1.746785ms |     114.55.58.3 | POST     "/api/v1/auth/login"
+2025/06/30 10:31:24 用户登录成功: admin (ID: 6)
+[GIN] 2025/06/30 - 10:31:24 | 200 |   77.766866ms |     114.55.58.3 | POST     "/api/v1/auth/login"
+[GIN] 2025/06/30 - 10:31:36 | 200 |     3.95697ms |     114.55.58.3 | GET      "/api/v1/images?page=1&page_size=3"
+[GIN] 2025/06/30 - 10:32:17 | 204 |      73.639µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250736924"
+[GIN] 2025/06/30 - 10:32:17 | 200 |    3.925663ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250736924"
+[GIN] 2025/06/30 - 10:32:33 | 204 |      15.113µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250753201"
+[GIN] 2025/06/30 - 10:32:33 | 200 |     3.46513ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751250753201"
+2025/06/30 10:33:15 用户登录成功: admin (ID: 6)
+[GIN] 2025/06/30 - 10:33:15 | 200 |  102.165707ms |     114.55.58.3 | POST     "/api/v1/auth/login"
+[GIN] 2025/06/30 - 10:33:15 | 200 |    7.609925ms |     114.55.58.3 | GET      "/api/v1/images?page=1&page_size=3"
+[GIN] 2025/06/30 - 10:33:15 | 200 |     142.315µs |     114.55.58.3 | HEAD     "/static/thumbnails/thumb-20250630095814-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:33:15 | 200 |     102.117µs |     114.55.58.3 | HEAD     "/static/thumbnails/thumb-20250630093901-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:33:15 | 200 |     102.836µs |     114.55.58.3 | HEAD     "/static/thumbnails/thumb-20250630090605-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:33:19 | 200 |     224.123µs |  204.76.203.219 | GET      "/"
+[GIN] 2025/06/30 - 10:34:16 | 204 |      11.972µs | 218.106.117.229 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250855459"
+[GIN] 2025/06/30 - 10:34:16 | 200 |    2.957831ms | 218.106.117.229 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250855459"
+2025/06/30 10:35:44 WebSocket客户端已断开，用户ID: 6，总连接数: 0
+[GIN] 2025/06/30 - 10:35:45 | 204 |      12.335µs | 218.106.117.229 | OPTIONS  "/api/v1/profile?_t=1751250945024"
+[GIN] 2025/06/30 - 10:35:45 | 204 |      36.113µs |    183.95.73.59 | OPTIONS  "/api/v1/profile?_t=1751250945051"
+[GIN] 2025/06/30 - 10:35:45 | 200 |    1.316352ms | 218.106.117.229 | GET      "/api/v1/profile?_t=1751250945024"
+[GIN] 2025/06/30 - 10:35:45 | 200 |    1.589243ms |    183.95.73.59 | GET      "/api/v1/profile?_t=1751250945051"
+[GIN] 2025/06/30 - 10:35:46 | 200 |     233.703µs |    183.95.73.59 | GET      "/api/v1/ws?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6ImFkbWluIiwiaXNzIjoiaWNwdC1zeXN0ZW0iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTc1MTMzMzUzMywibmJmIjoxNzUxMjQ3MTMzLCJpYXQiOjE3NTEyNDcxMzN9.ozLr8YlxDwCgRDfaAlhAghsbAP6EdSRCf6jQcCdIIvQ"
+2025/06/30 10:35:46 WebSocket客户端已连接，用户ID: 6，总连接数: 1
+[GIN] 2025/06/30 - 10:35:47 | 204 |      11.151µs |    183.95.73.59 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250946596"
+[GIN] 2025/06/30 - 10:35:47 | 200 |    3.642796ms |    183.95.73.59 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751250946596"
+[GIN] 2025/06/30 - 10:35:47 | 304 |     104.948µs |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250630090605-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:35:47 | 304 |     313.478µs |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250630095814-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:35:47 | 304 |       171.9µs |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250630093901-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:36:31 | 200 |     2.89178ms |     114.55.58.3 | GET      "/api/v1/images?page=1&page_size=1"
+[GIN] 2025/06/30 - 10:38:37 | 204 |      59.796µs |    183.95.73.59 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751251116631"
+[GIN] 2025/06/30 - 10:38:37 | 200 |    3.370134ms |    183.95.73.59 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751251116631"
+[GIN] 2025/06/30 - 10:38:37 | 200 |     161.323µs |       127.0.0.1 | HEAD     "/static/originals/20250630095814-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:37 | 200 |     271.804µs |       127.0.0.1 | HEAD     "/static/originals/20250629193506-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:37 | 200 |     217.306µs |       127.0.0.1 | HEAD     "/static/originals/20250629191532-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:37 | 200 |      191.26µs |       127.0.0.1 | HEAD     "/static/originals/20250630093901-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:37 | 200 |     151.425µs |       127.0.0.1 | HEAD     "/static/originals/20250629184915-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:37 | 200 |     125.499µs |       127.0.0.1 | HEAD     "/static/originals/20250629171633-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:37 | 200 |     244.092µs |       127.0.0.1 | HEAD     "/static/originals/20250629170747-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:37 | 200 |      126.73µs |       127.0.0.1 | HEAD     "/static/originals/20250629170505-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:45 | 204 |      13.475µs |    183.95.73.59 | OPTIONS  "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751251124441"
+[GIN] 2025/06/30 - 10:38:45 | 200 |    2.964155ms |    183.95.73.59 | GET      "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751251124441"
+2025/06/30 10:38:54 收到文件: 600x600bb (1) (1).jpg, 大小: 67208 bytes
+2025/06/30 10:38:54 图片记录 (ID: 1283) 创建成功, 任务已推送到队列
+[GIN] 2025/06/30 - 10:38:54 | 202 |    75.88834ms |    183.95.73.59 | POST     "/api/v1/upload"
+[GIN] 2025/06/30 - 10:38:54 | 204 |      10.962µs |    183.95.73.59 | OPTIONS  "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751251134132"
+[GIN] 2025/06/30 - 10:38:54 | 200 |    3.369218ms |    183.95.73.59 | GET      "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751251134132"
+[GIN] 2025/06/30 - 10:38:56 | 204 |      10.723µs |    183.95.73.59 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751251136328"
+[GIN] 2025/06/30 - 10:38:56 | 200 |    3.657704ms |    183.95.73.59 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751251136328"
+[GIN] 2025/06/30 - 10:38:57 | 200 |     146.746µs |       127.0.0.1 | HEAD     "/static/originals/20250630095814-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:57 | 200 |     155.214µs |       127.0.0.1 | HEAD     "/static/originals/20250629184915-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:57 | 200 |      77.169µs |       127.0.0.1 | HEAD     "/static/originals/20250629191532-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:57 | 200 |      89.716µs |       127.0.0.1 | HEAD     "/static/originals/20250629193506-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:57 | 200 |     139.702µs |       127.0.0.1 | HEAD     "/static/originals/20250630093901-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:57 | 200 |     119.994µs |       127.0.0.1 | HEAD     "/static/originals/20250629171633-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:57 | 200 |     218.351µs |       127.0.0.1 | HEAD     "/static/originals/20250629170747-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:57 | 200 |     121.678µs |       127.0.0.1 | HEAD     "/static/originals/20250629170505-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:58 | 200 |     337.508µs |       127.0.0.1 | GET      "/static/thumbnails/thumb-20250630103854-600x600bb (1) (1).jpg"
+[GIN] 2025/06/30 - 10:38:58 | 204 |       17.07µs |    183.95.73.59 | OPTIONS  "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751251137728"
+[GIN] 2025/06/30 - 10:38:58 | 200 |      4.4914ms |    183.95.73.59 | GET      "/api/v1/images?page=1&page_size=24&sort=created_at&order=desc&_t=1751251137728"
+[GIN] 2025/06/30 - 10:38:58 | 200 |     142.771µs |       127.0.0.1 | HEAD     "/static/originals/20250630095814-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:58 | 200 |     144.664µs |       127.0.0.1 | HEAD     "/static/originals/20250630093901-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:58 | 200 |     162.303µs |       127.0.0.1 | HEAD     "/static/originals/20250629193506-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:58 | 200 |     164.974µs |       127.0.0.1 | HEAD     "/static/originals/20250629191532-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:58 | 200 |     134.869µs |       127.0.0.1 | HEAD     "/static/originals/20250629184915-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:58 | 200 |     155.218µs |       127.0.0.1 | HEAD     "/static/originals/20250629171633-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:58 | 200 |     127.407µs |       127.0.0.1 | HEAD     "/static/originals/20250629170505-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:38:58 | 200 |     127.059µs |       127.0.0.1 | HEAD     "/static/originals/20250629170747-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:39:32 | 204 |      11.116µs |    183.95.73.59 | OPTIONS  "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751251171764"
+[GIN] 2025/06/30 - 10:39:32 | 200 |    2.969367ms |    183.95.73.59 | GET      "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751251171764"
+[GIN] 2025/06/30 - 10:39:43 | 204 |      13.168µs |    183.95.73.59 | OPTIONS  "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751251182721"
+[GIN] 2025/06/30 - 10:39:43 | 200 |    2.340877ms |    183.95.73.59 | GET      "/api/v1/images?page=1&page_size=12&sort=created_at&order=desc&_t=1751251182721"
+2025/06/30 10:40:52 用户登录成功: admin (ID: 6)
+[GIN] 2025/06/30 - 10:40:52 | 200 |  112.366265ms |     114.55.58.3 | POST     "/api/v1/auth/login"
+[GIN] 2025/06/30 - 10:40:52 | 200 |    3.077145ms |     114.55.58.3 | GET      "/api/v1/images?page=1&page_size=5"
+[GIN] 2025/06/30 - 10:40:52 | 200 |     160.595µs |     114.55.58.3 | HEAD     "/static/originals/20250630103854-600x600bb (1) (1).jpg"
+[GIN] 2025/06/30 - 10:40:52 | 200 |     148.109µs |     114.55.58.3 | HEAD     "/static/originals/20250630095814-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:40:52 | 200 |     169.808µs |     114.55.58.3 | HEAD     "/static/originals/20250630093901-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:40:52 | 200 |       187.9µs |     114.55.58.3 | HEAD     "/static/originals/20250629193506-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:40:52 | 200 |      94.129µs |     114.55.58.3 | HEAD     "/static/originals/20250629191532-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:40:52 | 200 |     120.099µs |     114.55.58.3 | HEAD     "/static/originals/20250630095814-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:40:52 | 200 |     150.832µs |     114.55.58.3 | HEAD     "/static/thumbnails/thumb-20250630095814-600x600bb (1).jpg"
+2025/06/30 10:41:54 用户登录成功: admin (ID: 6)
+[GIN] 2025/06/30 - 10:41:54 | 200 |    96.61546ms |     114.55.58.3 | POST     "/api/v1/auth/login"
+[GIN] 2025/06/30 - 10:41:54 | 200 |    3.128403ms |     114.55.58.3 | GET      "/api/v1/images?page=1&page_size=3"
+[GIN] 2025/06/30 - 10:41:54 | 200 |      142.79µs |     114.55.58.3 | HEAD     "/static/originals/20250630103854-600x600bb (1) (1).jpg"
+[GIN] 2025/06/30 - 10:41:54 | 200 |     110.773µs |     114.55.58.3 | HEAD     "/static/originals/20250630095814-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:41:54 | 200 |      370.73µs |     114.55.58.3 | HEAD     "/static/originals/20250630093901-600x600bb (1).jpg"
+[GIN] 2025/06/30 - 10:43:48 | 404 |        12.7µs |  90.151.171.108 | CONNECT  ""
+[GIN-debug] redirecting request 301: / --> http://whatismyip.akamai.com/?Z75591226191Q1
+[GIN] 2025/06/30 - 10:50:41 | 200 |    1.591513ms |   149.50.103.48 | GET      "/"
+[GIN] 2025/06/30 - 10:53:53 | 200 |     755.876µs |   167.94.146.63 | GET      "/"
+[GIN] 2025/06/30 - 10:53:57 | 200 |    1.623427ms |   167.94.146.63 | GET      "/"
+[GIN] 2025/06/30 - 10:53:59 | 404 |      508.37µs |   167.94.146.63 | GET      "/favicon.ico"
+[GIN] 2025/06/30 - 10:54:02 | 404 |      45.887µs |   167.94.146.63 | PRI      "*"
+[GIN] 2025/06/30 - 10:54:10 | 404 |     526.258µs |   167.94.146.63 | GET      "/favicon.ico"
+[GIN] 2025/06/30 - 10:54:11 | 404 |      54.483µs |   167.94.146.63 | PRI      "*"
+[GIN] 2025/06/30 - 10:54:17 | 404 |     448.043µs |   167.94.146.63 | GET      "/security.txt"
+[GIN] 2025/06/30 - 10:56:39 | 204 |      38.665µs |    183.95.73.59 | OPTIONS  "/api/v1/stats/dashboard?_t=1751252199130"
+[GIN] 2025/06/30 - 10:56:39 | 204 |      34.132µs |    183.95.73.59 | OPTIONS  "/api/v1/activity/recent?_t=1751252199131"
+[GIN] 2025/06/30 - 10:56:39 | 404 |    1.119194ms |    183.95.73.59 | GET      "/api/v1/stats/dashboard?_t=1751252199130"
+[GIN] 2025/06/30 - 10:56:39 | 404 |    2.372951ms |    183.95.73.59 | GET      "/api/v1/activity/recent?_t=1751252199131"
+[GIN] 2025/06/30 - 10:58:51 | 200 |      262.41µs |  167.94.145.110 | GET      "/"
+[GIN] 2025/06/30 - 10:58:56 | 200 |    1.325914ms |  167.94.145.110 | GET      "/"
+[GIN] 2025/06/30 - 10:58:57 | 404 |     862.885µs |  167.94.145.110 | GET      "/favicon.ico"
+[GIN] 2025/06/30 - 10:58:59 | 404 |       13.49µs |  167.94.145.110 | PRI      "*"
+[GIN] 2025/06/30 - 10:59:04 | 204 |      12.195µs |    183.95.73.59 | OPTIONS  "/api/v1/stats/dashboard?_t=1751252344349"
+[GIN] 2025/06/30 - 10:59:04 | 204 |      11.353µs |    183.95.73.59 | OPTIONS  "/api/v1/activity/recent?_t=1751252344349"
+[GIN] 2025/06/30 - 10:59:05 | 404 |       429.7µs |    183.95.73.59 | GET      "/api/v1/stats/dashboard?_t=1751252344349"
+[GIN] 2025/06/30 - 10:59:05 | 404 |     438.802µs |    183.95.73.59 | GET      "/api/v1/activity/recent?_t=1751252344349"
+[GIN] 2025/06/30 - 10:59:06 | 404 |     451.288µs |  167.94.145.110 | GET      "/favicon.ico"
+[GIN] 2025/06/30 - 10:59:08 | 404 |      14.399µs |  167.94.145.110 | PRI      "*"
+[GIN] 2025/06/30 - 10:59:15 | 404 |     470.933µs |  167.94.145.110 | GET      "/wiki"
+[GIN] 2025/06/30 - 10:59:16 | 200 |    1.222943ms |  112.94.253.158 | GET      "/"
+2025/06/30 11:00:36 用户登录成功: admin (ID: 6)
+[GIN] 2025/06/30 - 11:00:36 | 200 |  102.451519ms |     114.55.58.3 | POST     "/api/v1/auth/login"
+[GIN] 2025/06/30 - 11:00:36 | 404 |     456.369µs |     114.55.58.3 | GET      "/api/v1/stats/dashboard"
+2025/06/30 11:00:36 用户登录成功: admin (ID: 6)
+[GIN] 2025/06/30 - 11:00:36 | 200 |   71.421766ms |     114.55.58.3 | POST     "/api/v1/auth/login"
+[GIN] 2025/06/30 - 11:00:36 | 404 |     450.846µs |     114.55.58.3 | GET      "/api/v1/activity/recent"
+2025/06/30 11:00:37 用户登录成功: admin (ID: 6)
+[GIN] 2025/06/30 - 11:00:37 | 200 |   71.464988ms |     114.55.58.3 | POST     "/api/v1/auth/login"
+[GIN] 2025/06/30 - 11:00:37 | 404 |     449.717µs |     114.55.58.3 | GET      "/api/v1/stats/status-count"
+2025/06/30 11:00:37 用户登录成功: admin (ID: 6)
+[GIN] 2025/06/30 - 11:00:37 | 200 |   74.115093ms |     114.55.58.3 | POST     "/api/v1/auth/login"
+[GIN] 2025/06/30 - 11:00:37 | 404 |     487.033µs |     114.55.58.3 | GET      "/api/v1/stats/dashboard"

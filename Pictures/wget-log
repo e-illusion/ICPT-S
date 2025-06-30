@@ -1,0 +1,13 @@
+--2025-06-21 14:11:37--  https://img-s.msn.cn/tenant/amp/entityid/AA1H5zr8.img?w=768
+Resolving img-s.msn.cn (img-s.msn.cn)... 119.36.225.137, 113.194.51.244, 61.241.148.201, ...
+Connecting to img-s.msn.cn (img-s.msn.cn)|119.36.225.137|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Cookie coming from img-s.msn.cn attempted to set domain to img.s-msn.com
+Cookie coming from img-s.msn.cn attempted to set domain to img.s-msn.com
+Length: unspecified [image/webp]
+Saving to: ‘AA1H5zr8.img?w=768’
+
+AA1H5zr8.img?w=768       [<=>                   ]       0  --.-KB/s               AA1H5zr8.img?w=768       [ <=>                  ]  29.98K  --.-KB/s    in 0.001s  
+
+2025-06-21 14:11:37 (53.3 MB/s) - ‘AA1H5zr8.img?w=768’ saved [30696]
+

@@ -1,0 +1,41 @@
+2025/06/30 09:24:41 配置文件加载成功！
+2025/06/30 09:24:41 数据库连接成功！
+2025/06/30 09:24:41 数据库迁移成功！
+2025/06/30 09:24:41 Redis 连接成功！
+2025/06/30 09:24:41 WebSocket Hub 已启动
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+2025/06/30 09:24:41 ✅ 启用Gzip压缩
+2025/06/30 09:24:41 ✅ 启用并发限制: 100
+[GIN-debug] GET    /static/uploads/*filepath --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (5 handlers)
+[GIN-debug] HEAD   /static/uploads/*filepath --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (5 handlers)
+[GIN-debug] GET    /ping                     --> main.main.func1 (5 handlers)
+[GIN-debug] POST   /api/v1/auth/register     --> icpt-system/internal/api.RegisterHandler (5 handlers)
+[GIN-debug] POST   /api/v1/auth/login        --> icpt-system/internal/api.LoginHandler (5 handlers)
+[GIN-debug] GET    /api/v1/profile           --> icpt-system/internal/api.GetProfileHandler (6 handlers)
+[GIN-debug] POST   /api/v1/upload            --> icpt-system/internal/api.UploadImageHandler (6 handlers)
+[GIN-debug] GET    /api/v1/images/:id        --> icpt-system/internal/api.GetImageStatusHandler (6 handlers)
+[GIN-debug] GET    /api/v1/images            --> icpt-system/internal/api.GetUserImagesHandler (6 handlers)
+[GIN-debug] DELETE /api/v1/images/:id        --> icpt-system/internal/api.DeleteImageHandler (6 handlers)
+[GIN-debug] POST   /api/v1/images/batch-delete --> icpt-system/internal/api.BatchDeleteImagesHandler (6 handlers)
+[GIN-debug] GET    /api/v1/ws                --> icpt-system/internal/api.WebSocketHandler (6 handlers)
+[GIN-debug] GET    /api/v1/ws/stats          --> icpt-system/internal/api.WebSocketStatsHandler (6 handlers)
+[GIN-debug] POST   /api/v1/notify/:userID    --> icpt-system/internal/api.NotifyTestHandler (6 handlers)
+[GIN-debug] POST   /api/v1/upload-sync       --> icpt-system/internal/api.UploadImageSyncHandlerForTest (5 handlers)
+2025/06/30 09:24:41 HTTP API 服务器启动中，监听地址: 0.0.0.0:8080 (对外开放)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
+[GIN] 2025/06/30 - 09:24:48 | 200 |      161.37µs |       127.0.0.1 | GET      "/ping"
+[GIN] 2025/06/30 - 09:24:48 | 200 |      58.133µs |       127.0.0.1 | GET      "/ping"
+[GIN] 2025/06/30 - 09:24:48 | 404 |      17.014µs |       127.0.0.1 | OPTIONS  "/api/v1/auth/login"
+[GIN] 2025/06/30 - 09:24:48 | 404 |      18.412µs |       127.0.0.1 | OPTIONS  "/api/v1/profile"
+[GIN] 2025/06/30 - 09:24:48 | 200 |      60.548µs |       127.0.0.1 | GET      "/ping"
+[GIN] 2025/06/30 - 09:24:48 | 200 |      59.058µs |       127.0.0.1 | GET      "/ping"
+[GIN] 2025/06/30 - 09:24:55 | 404 |    1.126891ms |     58.19.27.59 | OPTIONS  "/api/v1/auth/login"
+[GIN] 2025/06/30 - 09:25:05 | 404 |     443.802µs |     58.19.27.59 | OPTIONS  "/api/v1/auth/login"
+[GIN] 2025/06/30 - 09:29:46 | 404 |      54.605µs |  204.76.203.219 | GET      "/"

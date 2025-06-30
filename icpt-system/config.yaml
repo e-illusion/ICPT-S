@@ -1,0 +1,28 @@
+server:
+  port: ":8080"
+  public_host: "https://114.55.58.3:8080"
+  https:                    # HTTPS配置
+    enabled: true           # 启用HTTPS
+    cert_file: "certs/server.crt"  # SSL证书文件路径
+    key_file: "certs/server.key"   # SSL私钥文件路径
+    port: ":8080"          # HTTPS端口 (修改为8080，与前端配置一致)
+database:
+  host: "127.0.0.1"
+  port: 3306
+  user: "icpt_user"
+  password: "123"
+  dbname: "ICPT_System"
+redis:                  # <-- 新增部分
+  addr: "127.0.0.1:6379"
+  password: ""          # 如果你的 Redis 没有密码，就留空
+  db: 0                 # 使用默认的 0 号数据库
+jwt:                    # <-- JWT配置
+  secret_key: "icpt-system-jwt-secret-key-2024"  # 生产环境请使用强随机密钥
+  expire_hours: 24      # 令牌有效期（小时）
+performance:            # 性能优化配置
+  worker_count: 8       # Worker进程数量（建议设为CPU核心数）
+  max_request_size: 32  # 最大请求大小（MB）
+  enable_gzip: true     # 启用响应压缩
+  enable_file_cache: true  # 启用文件缓存
+  enable_concurrency: true # 启用并发处理
+  max_concurrent_uploads: 100 # 最大并发上传数
