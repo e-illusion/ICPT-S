@@ -27,6 +27,7 @@
               :prefix-icon="Search"
               clearable
               @input="handleSearch"
+              @clear="handleSearch"
               style="width: 300px"
             />
           </div>
@@ -37,6 +38,7 @@
               placeholder="筛选状态"
               clearable
               @change="handleFilterChange"
+              @clear="handleFilterChange"
               style="width: 150px"
             >
               <el-option label="全部状态" value="" />
@@ -53,7 +55,7 @@
               style="width: 150px"
             >
               <el-option label="创建时间" value="created_at" />
-              <el-option label="文件名" value="file_name" />
+              <el-option label="文件名" value="original_filename" />
               <el-option label="文件大小" value="file_size" />
             </el-select>
           </div>
@@ -275,7 +277,7 @@ const loadImages = async () => {
     // The response from getImagesList is already the "data" part of the API response,
     // which should be in the format: { data: [...], total: xxx, page: xxx, ... }
     if (response && Array.isArray(response.data)) {
-      images.value = response.data.map(item => ({
+      let mappedImages = response.data.map(item => ({
         id: item.id,
         fileName: item.original_filename,
         fileSize: item.file_size,
@@ -285,10 +287,21 @@ const loadImages = async () => {
         thumbnailUrl: item.thumbnail_url,
         originalUrl: item.original_url,
       }))
+      
+      // ✨ FIX: 添加前端排序逻辑，确保排序正确
+      mappedImages = applySorting(mappedImages, sortField.value, sortOrder.value)
+      
+      images.value = mappedImages
       totalCount.value = response.total || 0
       
       // ✨ FIX: Dynamically fetch file sizes for images with zero file_size
-      await loadMissingFileSizes()
+      // Use try-catch to prevent this from breaking the main function
+      try {
+        await loadMissingFileSizes()
+      } catch (error) {
+        console.warn('Failed to load missing file sizes:', error)
+        // This error shouldn't prevent the main loading from succeeding
+      }
     } else {
       console.warn('Unexpected API response format:', response)
       images.value = []
@@ -432,18 +445,98 @@ const reprocessImage = async (imageId) => {
   }
 }
 
-const downloadImage = (image) => {
-  const url = getOriginalUrl(image.originalUrl)
-  const link = document.createElement('a')
-  link.href = url
-  link.download = image.fileName
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
+const downloadImage = async (image) => {
+  try {
+    const url = getOriginalUrl(image.originalUrl)
+    
+    // 显示下载开始提示
+    ElMessage.info('开始下载图像...')
+    
+    // 使用fetch下载文件，这样可以更好地处理HTTPS和错误
+    const response = await fetch(url, {
+      method: 'GET',
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'image/*'
+      }
+    })
+    
+    if (!response.ok) {
+      throw new Error(`下载失败: ${response.status} ${response.statusText}`)
+    }
+    
+    // 获取文件blob
+    const blob = await response.blob()
+    
+    // 创建下载链接
+    const downloadUrl = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = downloadUrl
+    link.download = image.fileName || 'image.jpg'
+    link.style.display = 'none'
+    
+    // 添加到DOM并触发下载
+    document.body.appendChild(link)
+    link.click()
+    
+    // 清理
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(downloadUrl)
+    
+    ElMessage.success('图像下载成功！')
+    
+  } catch (error) {
+    console.error('Download error:', error)
+    ElMessage.error(`下载失败: ${error.message}`)
+  }
 }
 
 const getThumbnailUrl = (thumbnailPath) => {
   return getImageThumbnailUrl(thumbnailPath)
+}
+
+// ✨ FIX: 前端排序函数，确保排序正确
+const applySorting = (imageList, sortField, sortOrder) => {
+  if (!imageList || imageList.length === 0) return imageList
+  
+  const sortedImages = [...imageList].sort((a, b) => {
+    let valueA, valueB
+    
+    switch (sortField) {
+      case 'created_at':
+        valueA = new Date(a.createdAt).getTime()
+        valueB = new Date(b.createdAt).getTime()
+        break
+      case 'original_filename':
+        valueA = (a.fileName || '').toLowerCase()
+        valueB = (b.fileName || '').toLowerCase()
+        break
+      case 'file_size':
+        valueA = a.fileSize || 0
+        valueB = b.fileSize || 0
+        break
+      default:
+        valueA = new Date(a.createdAt).getTime()
+        valueB = new Date(b.createdAt).getTime()
+    }
+    
+    // 处理字符串和数字比较
+    if (typeof valueA === 'string' && typeof valueB === 'string') {
+      if (sortOrder === 'asc') {
+        return valueA.localeCompare(valueB)
+      } else {
+        return valueB.localeCompare(valueA)
+      }
+    } else {
+      if (sortOrder === 'asc') {
+        return valueA - valueB
+      } else {
+        return valueB - valueA
+      }
+    }
+  })
+  
+  return sortedImages
 }
 
 // Utility functions
@@ -451,7 +544,8 @@ const formatFileSize = (bytes) => {
   // ✨ FIX: Better handling for zero or missing file size
   if (bytes === null || bytes === undefined) return '未知大小'
   if (bytes === 0) return '计算中...'  // Show "Computing..." for zero values as we're loading them dynamically
-  if (bytes < 0) return 'Invalid Size'
+  if (bytes === -1) return '获取失败' // Show "Failed to get" for failed loading
+  if (bytes < 0) return '无效大小'
   const k = 1024
   const sizes = ['B', 'KB', 'MB', 'GB', 'TB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
@@ -484,13 +578,17 @@ const handleImageError = (event) => {
   event.target.style.display = 'none'
 }
 
-// Debounce function
+// Debounce function with error handling
 function debounce(func, wait) {
   let timeout
   return function executedFunction(...args) {
     const later = () => {
       clearTimeout(timeout)
-      func(...args)
+      try {
+        func(...args)
+      } catch (error) {
+        console.error('Debounced function error:', error)
+      }
     }
     clearTimeout(timeout)
     timeout = setTimeout(later, wait)
@@ -594,10 +692,10 @@ const loadMissingFileSizes = async () => {
   console.log(`Loading file sizes for ${imagesWithoutSize.length} images...`)
   
   // Load file sizes in parallel, but limit concurrent requests to avoid overwhelming the server
-  const concurrency = 5
+  const concurrency = 3 // Reduced concurrency to be more conservative
   for (let i = 0; i < imagesWithoutSize.length; i += concurrency) {
     const batch = imagesWithoutSize.slice(i, i + concurrency)
-    await Promise.all(batch.map(async (image) => {
+    await Promise.allSettled(batch.map(async (image) => {
       try {
         const fileSize = await getFileSize(image.originalUrl)
         if (fileSize > 0) {
@@ -605,6 +703,8 @@ const loadMissingFileSizes = async () => {
         }
       } catch (error) {
         console.warn(`Failed to get file size for ${image.fileName}:`, error)
+        // Set a default message for failed file size loading
+        image.fileSize = -1 // Use -1 to indicate failed loading
       }
     }))
   }
@@ -616,16 +716,31 @@ const getFileSize = async (originalUrl) => {
   
   try {
     const url = getOriginalUrl(originalUrl)
-    const response = await fetch(url, { method: 'HEAD' })
+    
+    // Create abort controller for timeout
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 5000) // 5 second timeout
+    
+    const response = await fetch(url, { 
+      method: 'HEAD',
+      mode: 'cors',
+      credentials: 'same-origin',
+      signal: controller.signal
+    })
+    
+    clearTimeout(timeoutId) // Clear timeout if request completes
     
     if (response.ok) {
       const contentLength = response.headers.get('content-length')
-      if (contentLength) {
+      if (contentLength && contentLength !== '0') {
         return parseInt(contentLength, 10)
       }
     }
   } catch (error) {
-    console.warn('Failed to fetch file size:', error)
+    // Don't log timeout errors as warnings, they're expected
+    if (error.name !== 'AbortError') {
+      console.warn('Failed to fetch file size:', error)
+    }
   }
   
   return 0

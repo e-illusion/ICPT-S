@@ -8,6 +8,7 @@ const Layout = () => import('@/layout/index.vue')
 
 // Page components (lazy loaded)
 const Login = () => import('@/views/auth/Login.vue')
+const Register = () => import('@/views/auth/Register.vue')
 const Dashboard = () => import('@/views/dashboard/index.vue')
 const ImageUpload = () => import('@/views/images/Upload.vue')
 const ImageGallery = () => import('@/views/images/Gallery.vue')
@@ -32,6 +33,16 @@ const routes = [
         component: Login,
         meta: {
             title: '登录',
+            requiresAuth: false,
+            hideInMenu: true,
+        },
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register,
+        meta: {
+            title: '注册',
             requiresAuth: false,
             hideInMenu: true,
         },
@@ -221,8 +232,8 @@ router.beforeEach(async (to, from, next) => {
             next()
         }
     } else {
-        // If user is authenticated and tries to access login page
-        if (to.path === '/login' && authStore.isAuthenticated) {
+        // If user is authenticated and tries to access login or register page
+        if ((to.path === '/login' || to.path === '/register') && authStore.isAuthenticated) {
             next('/dashboard')
         } else {
             next()

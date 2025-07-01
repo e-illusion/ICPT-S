@@ -377,16 +377,19 @@ const loadRecentUploads = async () => {
     
     if (response && Array.isArray(response.data)) {
       // ✨ FIX: Map API data to frontend format with proper URL handling
-      recentUploads.value = response.data.map(item => ({
-        id: item.id,
-        fileName: item.original_filename,
-        fileSize: item.file_size,
-        status: item.status,
-        createdAt: item.created_at,
-        // ✨ FIX: Use getThumbnailUrl helper to build proper thumbnail URL
-        thumbnailUrl: item.thumbnail_url ? getThumbnailUrl(item.thumbnail_url) : null,
-        originalUrl: item.original_url,
-      }))
+      recentUploads.value = response.data
+        .map(item => ({
+          id: item.id,
+          fileName: item.original_filename,
+          fileSize: item.file_size,
+          status: item.status,
+          createdAt: item.created_at,
+          // ✨ FIX: Use getThumbnailUrl helper to build proper thumbnail URL
+          thumbnailUrl: item.thumbnail_url ? getThumbnailUrl(item.thumbnail_url) : null,
+          originalUrl: item.original_url,
+        }))
+        // ✨ FIX: 确保按创建时间降序排序
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     }
   } catch (error) {
     console.error('Failed to load recent uploads:', error)

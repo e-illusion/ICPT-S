@@ -165,6 +165,7 @@ export const getThumbnailUrl = (thumbnailPath) => {
  */
 export const getOriginalUrl = (originalPath) => {
     if (!originalPath) return null
+    // Use relative path for proxy - Vite will proxy /static requests to backend
     return `/static/${originalPath}`
 }
 

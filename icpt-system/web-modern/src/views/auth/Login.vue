@@ -151,8 +151,7 @@ const handleSubmit = async () => {
 
 // Handle register
 const handleRegister = () => {
-  ElMessage.info('注册功能开发中...')
-  // router.push('/register')
+  router.push('/register')
 }
 
 // Initialize default credentials in development

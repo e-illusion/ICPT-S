@@ -230,12 +230,15 @@ const loadRecentActivity = async () => {
     const response = await getRecentActivity()
     
     if (response && response.data && Array.isArray(response.data)) {
-      recentActivity.value = response.data.map(item => ({
-        time: new Date(item.time),
-        action: item.action,
-        image: item.image,
-        status: item.status,
-      }))
+      recentActivity.value = response.data
+        .map(item => ({
+          time: new Date(item.time),
+          action: item.action,
+          image: item.image,
+          status: item.status,
+        }))
+        // 按时间降序排序，确保最新的活动在前面
+        .sort((a, b) => b.time.getTime() - a.time.getTime())
     }
   } catch (error) {
     console.error('Failed to load recent activity:', error)
